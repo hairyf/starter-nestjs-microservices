@@ -1,0 +1,23 @@
+{
+  "name": "@service/provider",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "lnv -- oxrun watch src/main.ts",
+    "start": "lnv -- oxrun src/main.ts"
+  },
+  "dependencies": {
+    "@service/core": "workspace:^"
+  },
+  "service": {
+    "microservice": {
+      "transport": "REDIS",
+      "options": {
+        "host": "$REDIS_HOST",
+        "port": "$REDIS_PORT"
+      }
+    },
+    "host": "127.0.0.1",
+    "port": 4000
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@service/redis",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@hairy/utils": "^1.47.0",
+    "ioredis": "^5.9.1",
+    "nestjs-redlock-universal": "^0.3.0"
+  }
+}

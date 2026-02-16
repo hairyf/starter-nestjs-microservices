@@ -1,0 +1,9 @@
+shellEmulator: true
+
+trustPolicy: no-downgrade
+
+packages:
+  - packages/**/*
+
+patchedDependencies:
+  nestjs-redlock-universal: patches/nestjs-redlock-universal.patch

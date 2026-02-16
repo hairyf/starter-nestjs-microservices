@@ -1,0 +1,16 @@
+{
+  "name": "@service/gateway",
+  "scripts": {
+    "dev": "lnv -- oxrun watch src/main.ts",
+    "start": "lnv -- oxrun src/main.ts"
+  },
+  "dependencies": {
+    "@nestjs/bull": "^11.0.1",
+    "@service/core": "workspace:^",
+    "@service/redis": "workspace:^",
+    "bull": "^4.15.0"
+  },
+  "service": {
+    "port": 3000
+  }
+}
