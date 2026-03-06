@@ -7,10 +7,10 @@
     "start": "lnv -- oxrun src/main.ts"
   },
   "dependencies": {
-    "@nestjs/schedule": "^5.0.1",
+    "@nestjs/schedule": "catalog:nestjs",
     "@service/core": "workspace:^",
     "@service/redis": "workspace:^",
-    "nestjs-redlock-universal": "^0.3.0"
+    "nestjs-redlock-universal": "catalog:nestjs"
   },
   "service": {
     "port": 5000

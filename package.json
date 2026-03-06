@@ -15,28 +15,28 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@hairy/lnv": "^9.1.0",
-    "@hairy/oxrun": "^0.2.8",
-    "@nestjs/common": "^11.0.11",
-    "@nestjs/core": "^11.0.11",
-    "@nestjs/microservices": "^11.0.11",
-    "@nestjs/platform-express": "^11.0.11",
-    "@nestjs/swagger": "^11.0.6"
+    "@hairy/lnv": "catalog:cli",
+    "@hairy/oxrun": "catalog:cli",
+    "@nestjs/common": "catalog:nestjs",
+    "@nestjs/core": "catalog:nestjs",
+    "@nestjs/microservices": "catalog:nestjs",
+    "@nestjs/platform-express": "catalog:nestjs",
+    "@nestjs/swagger": "catalog:nestjs"
   },
   "optionalDependencies": {
-    "simple-git-hooks": "^2.13.1"
+    "simple-git-hooks": "catalog:cli"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.7.3",
-    "@antfu/ni": "^23.3.1",
-    "@antfu/utils": "^8.1.1",
-    "@oxc-node/core": "^0.0.35",
-    "@types/node": "^22.19.3",
-    "eslint": "^9.39.2",
-    "lint-staged": "^16.2.7",
-    "simple-git-hooks": "^2.13.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
+    "@antfu/utils": "catalog:cli",
+    "@oxc-node/core": "catalog:cli",
+    "@types/node": "catalog:types",
+    "eslint": "catalog:cli",
+    "lint-staged": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "typescript": "catalog:cli",
+    "vitest": "catalog:testing"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

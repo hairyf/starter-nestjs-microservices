@@ -7,5 +7,6 @@ export default antfu(
     'import/no-mutable-exports': 'off',
     'ts/explicit-function-return-type': 'off',
     'ts/consistent-type-imports': 'off',
+    'pnpm/yaml-enforce-settings': 'off',
   } },
 )

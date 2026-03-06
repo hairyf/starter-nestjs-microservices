@@ -4,6 +4,107 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  cli:
+    '@antfu/eslint-config':
+      specifier: ^6.7.3
+      version: 6.7.3
+    '@antfu/ni':
+      specifier: ^23.3.1
+      version: 23.3.1
+    '@antfu/utils':
+      specifier: ^8.1.1
+      version: 8.1.1
+    '@hairy/lnv':
+      specifier: ^9.1.0
+      version: 9.1.0
+    '@hairy/oxrun':
+      specifier: ^0.2.8
+      version: 0.2.8
+    '@oxc-node/core':
+      specifier: ^0.0.35
+      version: 0.0.35
+    eslint:
+      specifier: ^9.39.2
+      version: 9.39.2
+    lint-staged:
+      specifier: ^16.2.7
+      version: 16.2.7
+    simple-git-hooks:
+      specifier: ^2.13.1
+      version: 2.13.1
+    typescript:
+      specifier: ^5.9.3
+      version: 5.9.3
+  inlined:
+    '@hairy/utils':
+      specifier: ^1.47.0
+      version: 1.47.0
+  nestjs:
+    '@nestjs/bull':
+      specifier: ^11.0.1
+      version: 11.0.4
+    '@nestjs/common':
+      specifier: ^11.0.11
+      version: 11.1.11
+    '@nestjs/core':
+      specifier: ^11.0.11
+      version: 11.1.11
+    '@nestjs/microservices':
+      specifier: ^11.0.11
+      version: 11.1.11
+    '@nestjs/platform-express':
+      specifier: ^11.0.11
+      version: 11.1.11
+    '@nestjs/schedule':
+      specifier: ^5.0.1
+      version: 5.0.1
+    '@nestjs/swagger':
+      specifier: ^11.0.6
+      version: 11.2.3
+    nestjs-redlock-universal:
+      specifier: ^0.3.0
+      version: 0.3.0
+  testing:
+    vitest:
+      specifier: ^4.0.15
+      version: 4.0.16
+  types:
+    '@types/fs-extra':
+      specifier: ^11.0.4
+      version: 11.0.4
+    '@types/node':
+      specifier: ^22.19.3
+      version: 22.19.3
+    '@types/tunnel':
+      specifier: ^0.0.6
+      version: 0.0.6
+  utils:
+    '@manypkg/get-packages':
+      specifier: ^3.1.0
+      version: 3.1.0
+    bignumber.js:
+      specifier: ^9.1.2
+      version: 9.3.1
+    bull:
+      specifier: ^4.15.0
+      version: 4.16.5
+    dotenv-expand:
+      specifier: ^12.0.3
+      version: 12.0.3
+    fs-extra:
+      specifier: ^11.3.0
+      version: 11.3.3
+    ioredis:
+      specifier: ^5.9.1
+      version: 5.9.1
+    pathe:
+      specifier: ^2.0.3
+      version: 2.0.3
+    tunnel:
+      specifier: ^0.0.6
+      version: 0.0.6
+
 patchedDependencies:
   nestjs-redlock-universal:
     hash: b3631ac581dbe4cb478ce0e49cd2c651ae07a63ee3fc7c68ac3fda54ac07093e
@@ -14,63 +115,63 @@ importers:
   .:
     dependencies:
       '@hairy/lnv':
-        specifier: ^9.1.0
+        specifier: catalog:cli
         version: 9.1.0(@swc/core@1.15.8)(@types/node@22.19.3)(typescript@5.9.3)
       '@hairy/oxrun':
-        specifier: ^0.2.8
+        specifier: catalog:cli
         version: 0.2.8
       '@nestjs/common':
-        specifier: ^11.0.11
+        specifier: catalog:nestjs
         version: 11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/core':
-        specifier: ^11.0.11
+        specifier: catalog:nestjs
         version: 11.1.11(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.1.11)(@nestjs/platform-express@11.1.11)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/microservices':
-        specifier: ^11.0.11
+        specifier: catalog:nestjs
         version: 11.1.11(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)(ioredis@5.9.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/platform-express':
-        specifier: ^11.0.11
+        specifier: catalog:nestjs
         version: 11.1.11(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)
       '@nestjs/swagger':
-        specifier: ^11.0.6
+        specifier: catalog:nestjs
         version: 11.2.3(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)(reflect-metadata@0.2.2)
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^6.7.3
+        specifier: catalog:cli
         version: 6.7.3(@vue/compiler-sfc@3.3.10)(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@types/node@22.19.3)(jiti@2.6.1)(tsx@4.19.2)(yaml@2.8.2))
       '@antfu/ni':
-        specifier: ^23.3.1
+        specifier: catalog:cli
         version: 23.3.1
       '@antfu/utils':
-        specifier: ^8.1.1
+        specifier: catalog:cli
         version: 8.1.1
       '@oxc-node/core':
-        specifier: ^0.0.35
+        specifier: catalog:cli
         version: 0.0.35
       '@types/node':
-        specifier: ^22.19.3
+        specifier: catalog:types
         version: 22.19.3
       eslint:
-        specifier: ^9.39.2
+        specifier: catalog:cli
         version: 9.39.2(jiti@2.6.1)
       lint-staged:
-        specifier: ^16.2.7
+        specifier: catalog:cli
         version: 16.2.7
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:cli
         version: 5.9.3
       vitest:
-        specifier: ^4.0.16
+        specifier: catalog:testing
         version: 4.0.16(@types/node@22.19.3)(jiti@2.6.1)(tsx@4.19.2)(yaml@2.8.2)
     optionalDependencies:
       simple-git-hooks:
-        specifier: ^2.13.1
+        specifier: catalog:cli
         version: 2.13.1
 
   packages/apps/gateway:
     dependencies:
       '@nestjs/bull':
-        specifier: ^11.0.1
+        specifier: catalog:nestjs
         version: 11.0.4(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)(bull@4.16.5)
       '@service/core':
         specifier: workspace:^
@@ -79,7 +180,7 @@ importers:
         specifier: workspace:^
         version: link:../../services/redis
       bull:
-        specifier: ^4.15.0
+        specifier: catalog:utils
         version: 4.16.5
 
   packages/apps/provider:
@@ -91,7 +192,7 @@ importers:
   packages/apps/schedule:
     dependencies:
       '@nestjs/schedule':
-        specifier: ^5.0.1
+        specifier: catalog:nestjs
         version: 5.0.1(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)
       '@service/core':
         specifier: workspace:^
@@ -100,50 +201,50 @@ importers:
         specifier: workspace:^
         version: link:../../services/redis
       nestjs-redlock-universal:
-        specifier: ^0.3.0
+        specifier: catalog:nestjs
         version: 0.3.0(patch_hash=b3631ac581dbe4cb478ce0e49cd2c651ae07a63ee3fc7c68ac3fda54ac07093e)(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)(redlock-universal@0.8.1(ioredis@5.9.1))(reflect-metadata@0.2.2)
 
   packages/services/core:
     dependencies:
       '@hairy/utils':
-        specifier: ^1.34.0
-        version: 1.46.0
+        specifier: catalog:inlined
+        version: 1.47.0
       '@manypkg/get-packages':
-        specifier: ^3.1.0
+        specifier: catalog:utils
         version: 3.1.0
       bignumber.js:
-        specifier: ^9.1.2
+        specifier: catalog:utils
         version: 9.3.1
       dotenv-expand:
-        specifier: ^12.0.3
+        specifier: catalog:utils
         version: 12.0.3
       fs-extra:
-        specifier: ^11.3.0
+        specifier: catalog:utils
         version: 11.3.3
       pathe:
-        specifier: ^2.0.3
+        specifier: catalog:utils
         version: 2.0.3
       tunnel:
-        specifier: ^0.0.6
+        specifier: catalog:utils
         version: 0.0.6
     devDependencies:
       '@types/fs-extra':
-        specifier: ^11.0.4
+        specifier: catalog:types
         version: 11.0.4
       '@types/tunnel':
-        specifier: ^0.0.6
+        specifier: catalog:types
         version: 0.0.6
 
   packages/services/redis:
     dependencies:
       '@hairy/utils':
-        specifier: ^1.47.0
+        specifier: catalog:inlined
         version: 1.47.0
       ioredis:
-        specifier: ^5.9.1
+        specifier: catalog:utils
         version: 5.9.1
       nestjs-redlock-universal:
-        specifier: ^0.3.0
+        specifier: catalog:nestjs
         version: 0.3.0(patch_hash=b3631ac581dbe4cb478ce0e49cd2c651ae07a63ee3fc7c68ac3fda54ac07093e)(@nestjs/common@11.1.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.11)(redlock-universal@0.8.1(ioredis@5.9.1))(reflect-metadata@0.2.2)
 
 packages:
@@ -626,9 +727,6 @@ packages:
     resolution: {integrity: sha512-/dUkCNKU7O31oT609m9ccAM2FBnnaq8p+f24Vb1jEjBQFaXKwPZKdyGz/z9AFR8HlhjhH81Thv2rUFMTsnhmaA==}
     hasBin: true
 
-  '@hairy/utils@1.46.0':
-    resolution: {integrity: sha512-toNJ9k5rfxnm8MPMJcwd9zqaYpL4A2vNb5S12swQAVJA/vTv67GwPhmPrwPrZuykeF96n3N4Zj7jHIRbyOBxcw==}
-
   '@hairy/utils@1.47.0':
     resolution: {integrity: sha512-v45Z3s1a5TAhPPZSzN5QCL9c0lULK154eGJQYC51lyPdYAOpnvRLd2KB3VU7hhmvtSvu4boFJJNcMconW6r9Lg==}
 
@@ -931,37 +1029,31 @@ packages:
     resolution: {integrity: sha512-wKbAstp6Ztq5UVBf/csnMTPMef+wGsrNykJCAtJuO/l88Okm4jn6wnhudeD3hf/426Vw93txBS8veqN2JSb6fg==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-node/core-linux-arm64-musl@0.0.35':
     resolution: {integrity: sha512-IdLaYnFrDGRICQ86AoEQEv5Rfo//knhg4g9ABy7QE3C231C3YpbgwtY7YH7Qv+xHDuUHnTNo8Lo/iraSIY3tQA==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@oxc-node/core-linux-ppc64-gnu@0.0.35':
     resolution: {integrity: sha512-yxfWpG2as+al6G9epDvFk8AX1UWy76WlwCP3pUGtpEUGuoAO63JAHUMDSXv1sSd1YatJmRJ75ptexU6c/xMdXg==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-node/core-linux-s390x-gnu@0.0.35':
     resolution: {integrity: sha512-nH3mnP6ger1i4LaroWhvtk3coquNYBJD9eqG3OEuJEFGo1Ao80irFcFoktQCLLq47uomYuNQxNJw5covYNHvLw==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-node/core-linux-x64-gnu@0.0.35':
     resolution: {integrity: sha512-2VKErkkTxLViK/8xbdRoQ9+sid8ZGRROLkcmMtrggjQLU69EhL0wioUVztnDVjHfOPAN17lEAN7tUgxz+PAxCg==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-node/core-linux-x64-musl@0.0.35':
     resolution: {integrity: sha512-QDDZYWMbwB/1uyn0BPMYeqT6miWQBljzLCYESmsVcaHOps204yKHI1Ezp79n2BiYEghhu9RPWrOd4wZ7+Gqa7Q==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@oxc-node/core-openharmony-arm64@0.0.35':
     resolution: {integrity: sha512-ihb0W8mc0iM9SpfFwj9xY/1gVAPv2y7fGuW2w4jWOICCY2enJ8GnY2N9eYloPkHd2/2+S87M63H998psVZQquQ==}
@@ -1028,61 +1120,51 @@ packages:
     resolution: {integrity: sha512-PaMRNBSqCx7K3Wc9QZkFx5+CX27WFpAMxJNiYGAXfmMIKC7jstlr32UhTgK6T07OtqR+wYlWm9IxzennjnvdJg==}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.30.1':
     resolution: {integrity: sha512-B8Rcyj9AV7ZlEFqvB5BubG5iO6ANDsRKlhIxySXcF1axXYUyqwBok+XZPgIYGBgs7LDXfWfifxhw0Ik57T0Yug==}
     cpu: [arm]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.30.1':
     resolution: {integrity: sha512-hqVyueGxAj3cBKrAI4aFHLV+h0Lv5VgWZs9CUGqr1z0fZtlADVV1YPOij6AhcK5An33EXaxnDLmJdQikcn5NEw==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.30.1':
     resolution: {integrity: sha512-i4Ab2vnvS1AE1PyOIGp2kXni69gU2DAUVt6FSXeIqUCPIR3ZlheMW3oP2JkukDfu3PsexYRbOiJrY+yVNSk9oA==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-loongarch64-gnu@4.30.1':
     resolution: {integrity: sha512-fARcF5g296snX0oLGkVxPmysetwUk2zmHcca+e9ObOovBR++9ZPOhqFUM61UUZ2EYpXVPN1redgqVoBB34nTpQ==}
     cpu: [loong64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-powerpc64le-gnu@4.30.1':
     resolution: {integrity: sha512-GLrZraoO3wVT4uFXh67ElpwQY0DIygxdv0BNW9Hkm3X34wu+BkqrDrkcsIapAY+N2ATEbvak0XQ9gxZtCIA5Rw==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.30.1':
     resolution: {integrity: sha512-0WKLaAUUHKBtll0wvOmh6yh3S0wSU9+yas923JIChfxOaaBarmb/lBKPF0w/+jTVozFnOXJeRGZ8NvOxvk/jcw==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-s390x-gnu@4.30.1':
     resolution: {integrity: sha512-GWFs97Ruxo5Bt+cvVTQkOJ6TIx0xJDD/bMAOXWJg8TCSTEK8RnFeOeiFTxKniTc4vMIaWvCplMAFBt9miGxgkA==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.30.1':
     resolution: {integrity: sha512-UtgGb7QGgXDIO+tqqJ5oZRGHsDLO8SlpE4MhqpY9Llpzi5rJMvrK6ZGhsRCST2abZdBqIBeXW6WPD5fGK5SDwg==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.30.1':
     resolution: {integrity: sha512-V9U8Ey2UqmQsBT+xTOeMzPzwDzyXmnAoO4edZhL7INkwQcaW1Ckv3WJX3qrrp/VHaDkEWIBWhRwP47r8cdrOow==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.30.1':
     resolution: {integrity: sha512-WabtHWiPaFF47W3PkHnjbmWawnX/aE57K47ZDT1BXTS5GgrBUEpvOzq0FI0V/UYzQJgdb8XlhVNH8/fwV8xDjw==}
@@ -1138,28 +1220,24 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.15.8':
     resolution: {integrity: sha512-koiCqL09EwOP1S2RShCI7NbsQuG6r2brTqUYE7pV7kZm9O17wZ0LSz22m6gVibpwEnw8jI3IE1yYsQTVpluALw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.15.8':
     resolution: {integrity: sha512-4p6lOMU3bC+Vd5ARtKJ/FxpIC5G8v3XLoPEZ5s7mLR8h7411HWC/LmTXDHcrSXRC55zvAVia1eldy6zDLz8iFQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.15.8':
     resolution: {integrity: sha512-z3XBnbrZAL+6xDGAhJoN4lOueIxC/8rGrJ9tg+fEaeqLEuAtHSW2QHDHxDwkxZMjuF/pZ6MUTjHjbp8wLbuRLA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.15.8':
     resolution: {integrity: sha512-djQPJ9Rh9vP8GTS/Df3hcc6XP6xnG5c8qsngWId/BLA9oX6C7UzCPAn74BG/wGb9a6j4w3RINuoaieJB3t+7iQ==}
@@ -4039,12 +4117,6 @@ snapshots:
       mri: 1.2.0
       ohash: 1.1.6
       rerun-watcher: 0.5.0
-
-  '@hairy/utils@1.46.0':
-    dependencies:
-      '@types/lodash-es': 4.17.12
-      bignumber.js: 9.3.1
-      p-pipe: 4.0.0
 
   '@hairy/utils@1.47.0':
     dependencies:
