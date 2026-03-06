@@ -19,7 +19,7 @@ function parsePackages(packages: Package[]) {
     const absolute = pack.dir.replace(/\\/g, '/')
     const relative = pack.relativeDir.replace(/\\/g, '/')
     const json = pack.packageJson as any
-    if (!relative.startsWith('packages/apps') || relative.startsWith('packages/apps/gateway'))
+    if (!relative.startsWith('packages/apps'))
       continue
 
     if (!json.service.microservice)

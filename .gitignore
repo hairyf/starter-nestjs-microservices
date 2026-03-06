@@ -10,5 +10,5 @@ logs
 node_modules
 temp
 
-.env*
+.env
 generated
