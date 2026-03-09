@@ -1,0 +1,11 @@
+{
+  "name": "@service/redis",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@prisma-x/client": "workspace:*",
+    "@prisma/adapter-pg": "catalog:prisma"
+  },
+  "devDependencies": {
+    "prisma-x": "workspace:*"
+  }
+}

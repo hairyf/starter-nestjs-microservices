@@ -1,0 +1,7 @@
+{
+  "name": "@prisma-x/client",
+  "main": "src/index.js",
+  "dependencies": {
+    "@prisma/client": "catalog:prisma"
+  }
+}
