@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Development environment PostgreSQL database
+  postgres:
+    env_file:
+      - ../.env
+    image: postgres:${POSTGRES_VERSION}
+    container_name: ${POSTGRES_HOST}
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - './data/postgresql/data:/var/lib/postgresql/data'
+    networks:
+      - internal
+
+  # Redis development environment
+  redis:
+    env_file:
+      - ../.env
+    container_name: ${REDIS_HOST}
+    image: redis:${REDIS_VERSION}
+    restart: always
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - './data/redis/redis.conf:/etc/redis/redis.conf'
+      - './data/redis/data:/data'
+      - './data/redis/logs:/logs'
+    command: [redis-server, /etc/redis/redis.conf]
+    networks:
+      - internal
+
+networks:
+  internal:
+    external: true
