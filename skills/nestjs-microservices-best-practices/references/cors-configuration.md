@@ -11,7 +11,7 @@ description: Cross-origin resource sharing setup for NestJS applications
 
 ```typescript
 import { NestFactory } from '@nestjs/core'
-import { withNestjsCors } from '@service/core'
+import { withNestjsCors } from 'nestjs-extras-w'
 import { AppModule } from './app.module'
 
 async function bootstrap() {

@@ -3,7 +3,7 @@ name: nestjs-microservices-best-practices
 description: Comprehensive skills for building NestJS microservices architecture
 metadata:
   author: Hairyf
-  version: "2026.01.29"
+  version: "2026.03.09"
   source: Internal Documentation
 ---
 

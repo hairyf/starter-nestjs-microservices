@@ -66,39 +66,21 @@ SERVER_PORT=3000
 
 ### Runtime Configuration Access
 
-Access service configuration at runtime:
-
-```typescript
-import { app } from '@service/core'
-
-// Access current app instance
-const appInstance = app.instance
-
-// Access port
-const port = app.port
-
-// Access URL
-const url = app.url  // http://localhost:3000 (in development)
-
-// Access microservice config
-const microservice = app.microservice
-```
+Access service configuration at runtime from your bootstrap (e.g. from `package.json` or environment variables). If using **nestjs-extras-w** or **nestjs-mickit**, refer to their APIs for any exported app/config helpers.
 
 ## Configuration Patterns
 
 ### Development vs Production
 
 ```typescript
-import { app } from '@service/core'
-
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 if (isDevelopment) {
   // Development-specific configuration
-  console.log(`Server running at ${app.url}`)
+  console.log(`Server running at ${process.env.APP_URL || 'http://localhost:3000'}`)
 } else {
   // Production-specific configuration
-  app.url = process.env.APP_URL
+  const appUrl = process.env.APP_URL
 }
 ```
 
@@ -133,18 +115,18 @@ Each service can have different configurations:
 
 ### Dynamic Port Assignment
 
-The `withNestjsListen` function handles port conflicts automatically:
+The `startNestjsListen` function (nestjs-extras-w) handles port conflicts automatically:
 
 ```typescript
 // If port 3000 is in use, automatically tries 3001, 3002, etc.
-await withNestjsListen(app, service.port)
+await startNestjsListen(app, service)
 ```
 
 ## Key Points
 
 * **Environment expansion**: `$VARIABLE_NAME` syntax is automatically expanded
 * **Service-specific**: Each service has its own configuration in package.json
-* **Runtime access**: Use `app` object from `@service/core` for runtime config
+* **Runtime access**: Use `service` / `microservice` from package.json or env in your bootstrap
 * **Port fallback**: Listen function automatically handles port conflicts
 * **URL generation**: App URL is auto-generated in development mode
 * **Microservice config**: Microservice options are parsed and expanded at runtime

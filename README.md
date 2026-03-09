@@ -32,9 +32,8 @@ packages/
 │   ├── provider/          # Provider microservice
 │   └── schedule/          # Scheduling microservice
 └── services/              # Shared services
-    ├── bootstrap/         # Application bootstrap utilities
     ├── databases/         # Database configurations and clients
-    └── microservices/     # Microservices communication tools
+    └── redis/             # Redis integration
 ```
 
 ## 🛠️ Getting Started
@@ -127,14 +126,15 @@ Example main entry file:
 ```typescript
 // main.ts
 import { NestFactory } from '@nestjs/core'
-import { withNestjsListen, withNestjsMicroservice } from '@service/core'
-import { service } from './package.json'
+import { startNestjsListen } from 'nestjs-extras-w'
+import { startNestjsMicroservice } from 'nestjs-mickit'
+import { microservice, service } from './package.json'
 import { YourServiceModule } from './your-service.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(YourServiceModule)
-  await withNestjsMicroservice(app, service)
-  await withNestjsListen(app, service.port)
+  await startNestjsMicroservice(app, microservice)
+  await startNestjsListen(app, service)
 }
 
 bootstrap()
@@ -148,8 +148,8 @@ Services communicate using NestJS's built-in microservices capabilities:
 import { BullModule } from '@nestjs/bull'
 import { Module } from '@nestjs/common'
 import { ClientsModule } from '@nestjs/microservices'
-import { microservices } from '@service/core'
 import { isRedisAvailable, redis } from '@service/redis'
+import { microservices } from 'nestjs-mickit'
 import { AppController } from './app.controller'
 import { QueueModule } from './modules'
 

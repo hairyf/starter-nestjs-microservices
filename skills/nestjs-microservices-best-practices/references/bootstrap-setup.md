@@ -7,25 +7,25 @@ description: Application initialization and startup utilities for NestJS microse
 
 ## Usage
 
-The `@service/core` package provides bootstrap utilities for setting up NestJS applications with microservices support.
+Bootstrap utilities come from **nestjs-extras-w** (listen, Swagger, CORS, BigInt/decimal repair) and **nestjs-mickit** (microservice connection).
 
 ```typescript
 import { NestFactory } from '@nestjs/core'
 import {
-  withNestjsBigintRepair,
+  withDecimalRepair,
   withNestjsCors,
-  withNestjsListen,
-  withNestjsMicroservice,
   withNestjsSwagger,
-} from '@service/core'
-import { service } from './package.json'
+  startNestjsListen,
+} from 'nestjs-extras-w'
+import { startNestjsMicroservice } from 'nestjs-mickit'
+import { microservice, service } from './package.json'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
-  // Fix BigInt serialization issues
-  withNestjsBigintRepair(app)
+  // Fix BigInt/decimal serialization issues
+  withDecimalRepair(app)
 
   // Setup Swagger documentation
   withNestjsSwagger(app, config => config
@@ -37,10 +37,10 @@ async function bootstrap() {
   withNestjsCors(app)
 
   // Connect microservice (if configured in package.json)
-  await withNestjsMicroservice(app, service)
+  await startNestjsMicroservice(app, microservice)
 
   // Start HTTP server
-  await withNestjsListen(app, service.port)
+  await startNestjsListen(app, service)
 }
 
 bootstrap()
@@ -48,9 +48,9 @@ bootstrap()
 
 ## Key Functions
 
-### `withNestjsMicroservice(app, service)`
+### `startNestjsMicroservice(app, microservice)` (nestjs-mickit)
 
-Connects a microservice to the application based on `package.json` service configuration.
+Connects a microservice to the application based on `package.json` microservice configuration.
 
 **Configuration in package.json:**
 ```json
@@ -73,16 +73,16 @@ Connects a microservice to the application based on `package.json` service confi
 - Converts transport string to NestJS Transport enum
 - Starts all microservices after connection
 
-### `withNestjsListen(app, port)`
+### `startNestjsListen(app, service)` (nestjs-extras-w)
 
-Starts the HTTP server with automatic port fallback.
+Starts the HTTP server with automatic port fallback (uses `service` from package.json).
 
 **Features:**
 - If port is in use, automatically tries `port + 1`
 - Logs service URL, Swagger URL, and environment
 - Handles graceful shutdown on SIGINT
 
-### `withNestjsSwagger(app, setup)`
+### `withNestjsSwagger(app, setup)` (nestjs-extras-w)
 
 Configures Swagger API documentation.
 
@@ -90,7 +90,7 @@ Configures Swagger API documentation.
 - UI: `/swagger/website`
 - JSON: `/swagger/json`
 
-### `withNestjsCors(app)`
+### `withNestjsCors(app)` (nestjs-extras-w)
 
 Enables CORS with permissive defaults for development.
 
@@ -99,13 +99,13 @@ Enables CORS with permissive defaults for development.
 - Supports common HTTP methods
 - Includes credentials
 
-### `withNestjsBigintRepair(app)`
+### `withDecimalRepair(app)` (nestjs-extras-w)
 
-Fixes BigInt serialization for JSON responses. Currently requires external decimal library parameter.
+Fixes BigInt/decimal serialization for JSON responses.
 
 ## Key Points
 
-* **Order matters**: Call `withNestjsMicroservice` before `withNestjsListen` to ensure microservices are ready
+* **Order matters**: Call `startNestjsMicroservice` before `startNestjsListen` to ensure microservices are ready
 * **Environment expansion**: Use `$VARIABLE_NAME` syntax in package.json for environment variable substitution
 * **Port fallback**: The listen function automatically handles port conflicts, useful in development
-* **Microservice optional**: If `service.microservice` is not defined, the function returns early without error
+* **Microservice optional**: If `microservice` is not defined in package.json, handle accordingly in your bootstrap

@@ -33,7 +33,7 @@ Each microservice defines its configuration in `package.json`:
 ### Discovery Functions
 
 ```typescript
-import { microservices, microservice, getMicroservices } from '@service/core'
+import { microservices, microservice, getMicroservices } from 'nestjs-mickit'
 
 // Get all discovered microservices
 const allServices = microservices()
@@ -105,7 +105,7 @@ The discovered services are used by `ClientsModule.register()`:
 
 ```typescript
 import { ClientsModule } from '@nestjs/microservices'
-import { microservices } from '@service/core'
+import { microservices } from 'nestjs-mickit'
 
 @Module({
   imports: [

@@ -14,9 +14,10 @@ packages/
 │   ├── provider/          # Provider microservice
 │   └── schedule/          # Scheduling microservice
 └── services/              # Shared libraries
-    ├── core/              # Core utilities and bootstrap
     └── redis/             # Redis integration
 ```
+
+Bootstrap and microservice utilities are provided by external packages: **nestjs-extras-w** (listen, Swagger, CORS, decimal repair) and **nestjs-mickit** (microservice connection and discovery).
 
 ## Package Organization
 
@@ -39,7 +40,8 @@ gateway/
 {
   "name": "@service/gateway",
   "dependencies": {
-    "@service/core": "workspace:^",
+    "nestjs-extras-w": "catalog:nestjs",
+    "nestjs-mickit": "catalog:nestjs",
     "@service/redis": "workspace:^"
   },
   "service": {
@@ -50,17 +52,7 @@ gateway/
 
 ### Shared Services (`packages/services/`)
 
-Reusable libraries shared across applications:
-
-```
-core/
-├── package.json
-└── src/
-    ├── bootstrap/       # Application bootstrap utilities
-    ├── microservices/   # Microservice communication
-    ├── constants/       # Shared constants
-    └── utils/          # Utility functions
-```
+Reusable libraries shared across applications (e.g. `redis/`). Bootstrap and microservice utilities are provided by **nestjs-extras-w** and **nestjs-mickit**.
 
 ## Workspace Configuration
 
@@ -125,12 +117,13 @@ Microservices define transport configuration:
 
 ### Workspace Protocol
 
-Use `workspace:^` for internal dependencies:
+Use `workspace:^` for internal workspace packages; use catalog or version for external packages such as nestjs-extras-w and nestjs-mickit:
 
 ```json
 {
   "dependencies": {
-    "@service/core": "workspace:^",
+    "nestjs-extras-w": "catalog:nestjs",
+    "nestjs-mickit": "catalog:nestjs",
     "@service/redis": "workspace:^"
   }
 }

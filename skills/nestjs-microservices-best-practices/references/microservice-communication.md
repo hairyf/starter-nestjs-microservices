@@ -14,7 +14,7 @@ Register microservice clients in your module:
 ```typescript
 import { Module } from '@nestjs/common'
 import { ClientsModule } from '@nestjs/microservices'
-import { microservices } from '@service/core'
+import { microservices } from 'nestjs-mickit'
 
 @Module({
   imports: [
@@ -75,7 +75,7 @@ export class AppController {
 ### Single Client
 
 ```typescript
-import { microservice, client } from '@service/core'
+import { microservice, client } from 'nestjs-mickit'
 
 // Get microservice configuration
 const config = microservice('@service/provider')
@@ -87,7 +87,7 @@ const providerClient = client('@service/provider')
 ### Multiple Clients
 
 ```typescript
-import { clients } from '@service/core'
+import { clients } from 'nestjs-mickit'
 
 // Create clients for specific services
 const [providerClient, scheduleClient] = clients([

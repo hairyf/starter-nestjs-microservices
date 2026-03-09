@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { ClientsModule } from '@nestjs/microservices'
 import { ScheduleModule as NestjsScheduleModule } from '@nestjs/schedule'
-import { microservices } from '@service/core'
 import { redis } from '@service/redis'
+import { microservices } from 'nestjs-mickit'
 import { IoredisAdapter, RedlockModule } from 'nestjs-redlock-universal'
 import { AppService } from './app.service'
 

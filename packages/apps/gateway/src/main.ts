@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core'
-import { withNestjsListen, withNestjsSwagger } from '@service/core'
+import { startNestjsListen, withNestjsSwagger } from 'nestjs-extras-w'
 import { service } from '../package.json'
 import { AppModule } from './app.module'
 
@@ -10,7 +10,7 @@ async function main() {
     .setTitle('Website')
     .setDescription('The website API')
     .setVersion('1.0'))
-  withNestjsListen(app, service.port)
+  startNestjsListen(app, service)
 }
 
 main()

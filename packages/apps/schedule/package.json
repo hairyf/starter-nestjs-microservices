@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@nestjs/schedule": "catalog:nestjs",
-    "@service/core": "workspace:^",
     "@service/redis": "workspace:^",
     "nestjs-redlock-universal": "catalog:nestjs"
   },

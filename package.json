@@ -21,7 +21,9 @@
     "@nestjs/core": "catalog:nestjs",
     "@nestjs/microservices": "catalog:nestjs",
     "@nestjs/platform-express": "catalog:nestjs",
-    "@nestjs/swagger": "catalog:nestjs"
+    "@nestjs/swagger": "catalog:nestjs",
+    "nestjs-extras-w": "catalog:nestjs",
+    "nestjs-mickit": "catalog:nestjs"
   },
   "optionalDependencies": {
     "simple-git-hooks": "catalog:cli"

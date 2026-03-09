@@ -1,18 +1,16 @@
 import { NestFactory } from '@nestjs/core'
 import {
-  withNestjsBigintRepair,
+  startNestjsListen,
   withNestjsCors,
-  withNestjsListen,
-  withNestjsMicroservice,
   withNestjsSwagger,
-} from '@service/core'
-import { service } from '../package.json'
+} from 'nestjs-extras-w'
+import { startNestjsMicroservice } from 'nestjs-mickit'
+import { microservice, service } from '../package.json'
 import { AppModule } from './app.module'
 
-async function bootstrap() {
+async function main() {
   const app = await NestFactory.create(AppModule)
 
-  withNestjsBigintRepair(app)
   withNestjsSwagger(app, config => config
     .setTitle('Website')
     .setDescription('The website API')
@@ -20,7 +18,8 @@ async function bootstrap() {
 
   withNestjsCors(app)
 
-  await withNestjsMicroservice(app, service)
-  await withNestjsListen(app, service.port)
+  await startNestjsMicroservice(app, microservice)
+  await startNestjsListen(app, service)
 }
-bootstrap()
+
+main()

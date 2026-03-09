@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "@nestjs/bull": "catalog:nestjs",
-    "@service/core": "workspace:^",
     "@service/redis": "workspace:^",
     "bull": "catalog:utils"
   },

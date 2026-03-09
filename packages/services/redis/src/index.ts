@@ -1,25 +1,16 @@
-import type { RedisOptions } from 'ioredis'
 import process from 'node:process'
-import { proxy } from '@hairy/utils'
-import { Redis } from 'ioredis'
+import { ghost } from '@hairy/utils'
+import { Redis, RedisOptions } from 'ioredis'
 
-const redis = proxy<Redis, { enable: boolean }>(
-  undefined,
-  { enable: false },
-  { strictMessage: 'Redis is not available, please check your environment variables.' },
-)
+export const redis = ghost<Redis>('Redis is not available, please check your environment variables.')
 
 if (process.env.REDIS_HOST && process.env.REDIS_PORT) {
   const options: RedisOptions = {
     host: process.env.REDIS_HOST!,
     port: Number(process.env.REDIS_PORT!),
   }
-  redis.proxy.update(new Redis(options))
-  redis.enable = true
+  redis.resolve(new Redis(options))
 }
 else if (process.env.REDIS_URL) {
-  redis.proxy.update(new Redis(process.env.REDIS_URL!))
-  redis.enable = true
+  redis.resolve(new Redis(process.env.REDIS_URL!))
 }
-
-export { redis }

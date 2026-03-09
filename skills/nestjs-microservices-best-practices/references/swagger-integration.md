@@ -11,7 +11,7 @@ description: Swagger API documentation setup and configuration
 
 ```typescript
 import { NestFactory } from '@nestjs/core'
-import { withNestjsSwagger } from '@service/core'
+import { withNestjsSwagger } from 'nestjs-extras-w'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
