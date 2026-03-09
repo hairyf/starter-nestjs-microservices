@@ -9,14 +9,14 @@ description: Redis client setup and usage patterns
 
 ### Basic Setup
 
-The `@service/redis` package provides a Redis client with automatic environment detection:
+The `@service/redis` package exports a **ghost** (from `@hairy/utils`) that is resolved to an ioredis `Redis` instance when env is set. Use `redis.enabled` to check availability:
 
 ```typescript
 import { redis } from '@service/redis'
 
-// Check if Redis is available
-if (redis.enable) {
-  // Use Redis client
+// Check if Redis is available (ghost has been resolved)
+if (redis.enabled) {
+  // Use ioredis methods directly
   await redis.set('key', 'value')
   const value = await redis.get('key')
 }
@@ -39,6 +39,8 @@ REDIS_URL=redis://localhost:6379
 
 ### Integration with Bull Queue
 
+When `redis.enabled` is true, `redis` is the real ioredis client; use `redis.options` (host/port) for Bull:
+
 ```typescript
 import { BullModule } from '@nestjs/bull'
 import { redis } from '@service/redis'
@@ -46,7 +48,7 @@ import { redis } from '@service/redis'
 @Module({
   imports: [
     BullModule.forRoot({
-      redis: redis.enable
+      redis: redis.enabled
         ? {
             host: redis.options.host,
             port: redis.options.port,
@@ -62,13 +64,15 @@ export class QueueModule {}
 
 ### Direct Redis Operations
 
+Always guard with `redis.enabled`; when not enabled, calling ioredis methods on the ghost will throw.
+
 ```typescript
 import { redis } from '@service/redis'
 
 @Injectable()
 export class CacheService {
   async setCache(key: string, value: string, ttl?: number) {
-    if (!redis.enable) {
+    if (!redis.enabled) {
       throw new Error('Redis is not available')
     }
 
@@ -80,7 +84,7 @@ export class CacheService {
   }
 
   async getCache(key: string) {
-    if (!redis.enable) {
+    if (!redis.enabled) {
       return null
     }
 
@@ -88,7 +92,7 @@ export class CacheService {
   }
 
   async deleteCache(key: string) {
-    if (!redis.enable) {
+    if (!redis.enabled) {
       return
     }
 
@@ -97,23 +101,24 @@ export class CacheService {
 }
 ```
 
-## Proxy Pattern
+## Ghost API (from `@hairy/utils`)
 
-The Redis client uses a proxy pattern that provides:
+The exported `redis` is a **ghost** of type `Ghost<Redis>`:
 
-- **Safe access**: Returns `undefined` if Redis is not configured
-- **Type safety**: Full TypeScript support for ioredis methods
-- **Enable flag**: `redis.enable` indicates if Redis is available
-- **Options access**: `redis.options` provides host/port when enabled
+- **`redis.enabled`**: `true` after `redis.resolve(redisInstance)` is called (when env has `REDIS_*`).
+- **`redis.resolve(value)`**: Called by the package on load when env is set; do not call in app code.
+- **ioredis methods**: When `enabled`, `redis` is the real ioredis client (`get`, `set`, `setex`, `del`, etc.).
+- **`redis.options`**: When enabled, the underlying client’s connection options (e.g. `host`, `port`) for Bull or other config.
+- **Strict behavior**: If Redis is not configured, calling methods on `redis` (e.g. `redis.get()`) throws the ghost’s strict message. Always check `redis.enabled` first.
 
 ## Key Points
 
-* **Optional dependency**: Redis is optional - application works without it
-* **Auto-detection**: Automatically detects Redis configuration from environment
-* **ioredis client**: Uses `ioredis` library under the hood
-* **Proxy safety**: Throws error if accessed when not enabled (with strict mode)
-* **Connection options**: Supports standard ioredis `RedisOptions`
-* **URL support**: Accepts both host/port and connection URL formats
+* **Optional dependency**: Redis is optional; the ghost is unresolved until env is set.
+* **Auto-detection**: On load, if `REDIS_HOST`+`REDIS_PORT` or `REDIS_URL` is set, the package calls `redis.resolve(new Redis(...))`.
+* **ioredis client**: Resolved value is a real `ioredis` `Redis` instance; full ioredis API when `redis.enabled`.
+* **Ghost safety**: Call methods only when `redis.enabled`; otherwise the ghost throws.
+* **Connection options**: Supports `RedisOptions` (host/port) or `REDIS_URL`; when enabled, `redis.options` exposes connection options.
+* **URL support**: Accepts both host/port and connection URL formats.
 
 ## Error Handling
 
@@ -121,7 +126,7 @@ The Redis client uses a proxy pattern that provides:
 import { redis } from '@service/redis'
 
 async function useRedis() {
-  if (!redis.enable) {
+  if (!redis.enabled) {
     // Handle gracefully when Redis is not available
     console.warn('Redis not configured, using fallback')
     return fallbackMethod()

@@ -19,7 +19,7 @@ import { redis } from '@service/redis'
 @Module({
   imports: [
     BullModule.forRoot({
-      redis: redis.enable
+      redis: redis.enabled
         ? {
             host: redis.options.host,
             port: redis.options.port,

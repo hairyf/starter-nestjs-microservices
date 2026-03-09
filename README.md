@@ -148,7 +148,7 @@ Services communicate using NestJS's built-in microservices capabilities:
 import { BullModule } from '@nestjs/bull'
 import { Module } from '@nestjs/common'
 import { ClientsModule } from '@nestjs/microservices'
-import { isRedisAvailable, redis } from '@service/redis'
+import { redis } from '@service/redis'
 import { microservices } from 'nestjs-mickit'
 import { AppController } from './app.controller'
 import { QueueModule } from './modules'
