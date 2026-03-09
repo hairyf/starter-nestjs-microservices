@@ -1,4 +1,4 @@
-# Microservices NestJS
+# NestJS Starter - Microservices
 
 <p align="center">
   <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" />
@@ -34,65 +34,54 @@ packages/
 └── services/              # Shared services
     ├── databases/         # Database configurations and clients
     └── redis/             # Redis integration
+docker/                    # Docker config (compose & build)
+├── docker-compose.deploy.yml   # Microservices deployment (gateway / provider / schedule)
+├── docker-compose.service.yml  # Dev dependencies (PostgreSQL, Redis)
+├── deploy.dockerfile           # Multi-app build image
+└── .dockerignore
 ```
 
-## 🛠️ Getting Started
+## 🛠️ Prerequisites
 
 Before that, you need to meet the following conditions:
 
-- Node.js 18+
+- Node.js 20+
 - pnpm 10+
-- A database (PostgreSQL, MySQL, etc.)
-- Docker & Docker Compose (optional, for containerized deployment)
 
-### Install
+## Setup
+
+```sh
+# 1. Create environment file
+cp .env.example .env
+# Edit .env file as needed(if prod)
+
+# 2. Start docker compose service
+docker-compose --env-file .env -f docker/docker-compose.service.yml up -d
+
+# 3. Install dependencies
+pnpm install
+```
+
+## Running the Application
 
 ```bash
-# Clone the repository and navigate to the project root
-npx degit hairyf/starter-nestjs#microservices my-project
-cd my-project
+# Development mode (watch)
+pnpm dev # all services
+cd packages/apps/gateway && pnpm dev # only gateway service
 
-# Install dependencies
-pnpm install
-
-# Start development servers
-pnpm dev
+# Production run
+pnpm start # all services
+cd packages/apps/gateway && pnpm start # only gateway service
 ```
 
 ## ⚙️ Configuration
 
-### Environment Variables
-
-The project uses a `.env` file for configuration. Create one in the root directory with the following variables:
+The global `.env` file contains environment variables shared by all services, while each service directory’s `.env` file is dedicated to that specific service. The service-level `.env` has higher priority than the global `.env` file and will be loaded to override the global settings.
 
 ```
-DATABASE_URL=mysql://username:password@localhost:3306
+packages/apps/gateway/.env  # Gateway service environment variables
+.env                        # Global environment variables
 ```
-
-Key environment variables:
-- `DATABASE_URL`: Connection string for your database (PostgreSQL, MySQL, etc.)
-
-### Docker Deployment
-
-The project includes a `docker-compose.yml` file for easy deployment:
-
-```bash
-# Start all services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop all services
-docker-compose down
-```
-
-The Docker Compose configuration:
-- **Gateway**: Exposed on port 3000
-- **Provider**: Exposed on port 4000
-- **Schedule**: Exposed on port 5000
-
-> All services share an internal network
 
 ## 💻 Development Guide
 
@@ -102,14 +91,14 @@ Each application defines its service configuration in its `package.json` file:
 
 ```json
 {
+  "microservice": {
+    "transport": "REDIS",
+    "options": {
+      "host": "$REDIS_HOST",
+      "port": "$REDIS_PORT"
+    }
+  },
   "service": {
-    "microservice": {
-      "transport": "REDIS",
-      "options": {
-        "host": "$REDIS_HOST",
-        "port": "$REDIS_PORT"
-      }
-    },
     "host": "localhost",
     "port": 4000
   }
