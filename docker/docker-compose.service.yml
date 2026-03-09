@@ -1,8 +1,8 @@
+name: 'starter-nestjs:service'
+
 services:
   # Development environment PostgreSQL database
   postgres:
-    env_file:
-      - ../.env
     image: postgres:${POSTGRES_VERSION}
     container_name: postgres
     restart: always
@@ -19,8 +19,6 @@ services:
 
   # Redis development environment
   redis:
-    env_file:
-      - ../.env
     container_name: redis
     image: redis:${REDIS_VERSION}
     restart: always
