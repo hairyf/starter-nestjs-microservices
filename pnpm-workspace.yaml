@@ -28,7 +28,7 @@ catalogs:
     '@nestjs/platform-express': ^11.0.11
     '@nestjs/schedule': ^5.0.1
     '@nestjs/swagger': ^11.0.6
-    nestjs-extras-w: ^0.3.0
+    nestjs-extras-w: ^0.3.3
     nestjs-mickit: ^0.1.0
     nestjs-redlock-universal: ^0.3.0
   testing:
