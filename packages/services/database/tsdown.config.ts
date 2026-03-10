@@ -6,6 +6,7 @@ const config = defineConfig({
     post: './prisma/post/generated/client.ts',
     user: './prisma/user/generated/client.ts',
   },
+  unbundle: true,
   exports: {
     enabled: true,
     devExports: true,
