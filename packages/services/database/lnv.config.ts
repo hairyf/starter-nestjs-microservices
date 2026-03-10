@@ -1,5 +1,7 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import { defineConfig } from '@hairy/lnv'
-import { prismas } from './utils'
 
 const config = defineConfig({
   scripts: {
@@ -14,7 +16,7 @@ const config = defineConfig({
 })
 
 function combinePrismaCommand(command: string) {
-  return prismas().map(prisma => [
+  return fs.readdirSync(path.join(process.cwd(), 'prisma')).map(prisma => [
     `prisma ${command}`,
     `--schema=./prisma/${prisma}/schema.prisma`,
     `--config ./prisma/${prisma}/prisma.config.ts`,

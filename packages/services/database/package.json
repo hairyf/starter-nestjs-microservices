@@ -1,5 +1,6 @@
 {
   "name": "@service/database",
+  "type": "module",
   "exports": {
     ".": "./index.ts",
     "./post": "./prisma/post/generated/client.ts",
