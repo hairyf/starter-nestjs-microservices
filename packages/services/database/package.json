@@ -1,11 +1,32 @@
 {
-  "name": "@service/redis",
-  "main": "src/index.ts",
+  "name": "@service/database",
+  "exports": {
+    ".": "./index.ts",
+    "./post": "./prisma/post/generated/client.ts",
+    "./user": "./prisma/user/generated/client.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "prisma": "lnv prisma"
+  },
   "dependencies": {
-    "@prisma-x/client": "workspace:*",
-    "@prisma/adapter-pg": "catalog:prisma"
+    "@prisma/adapter-pg": "catalog:prisma",
+    "@prisma/client": "catalog:prisma"
   },
   "devDependencies": {
-    "prisma-x": "workspace:*"
+    "@hairy/lnv": "catalog:cli",
+    "prisma": "catalog:prisma",
+    "tsdown": "catalog:cli",
+    "tsx": "catalog:cli"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./post": "./dist/post.mjs",
+      "./user": "./dist/user.mjs",
+      "./package.json": "./package.json"
+    }
   }
 }
